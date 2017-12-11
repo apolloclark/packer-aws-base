@@ -1,5 +1,7 @@
 .project
 .vagrant
+.rspect
+Gemfile.lock
 
 **/ansible/roles/*
 **/playbook.retry
