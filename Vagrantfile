@@ -33,7 +33,7 @@ Vagrant.configure(2) do |config|
         end
     end
       
-    # Configure the box with Ansible, running on within the Guest Machine
+    # Configure the box with Ansible, running within the Guest Machine
     # https://www.vagrantup.com/docs/provisioning/ansible.html
     # https://www.vagrantup.com/docs/provisioning/ansible_common.html
     # https://www.vagrantup.com/docs/provisioning/ansible_local.html
@@ -43,5 +43,13 @@ Vagrant.configure(2) do |config|
         ansible.playbook = "playbook.yml"
         ansible.extra_vars = "vars.yml"
         ansible.sudo = true
+    end
+    
+    # Verify the components are installed and running
+    # https://github.com/vvchik/vagrant-serverspec
+    config.vm.provision "serverspec" do |spec|
+      
+      # pattern for specfiles to search
+      spec.pattern = 'serverspec/*_spec.rb'
     end
 end

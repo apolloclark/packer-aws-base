@@ -3,7 +3,7 @@
 - src: geerlingguy.firewall
 - src: geerlingguy.ntp
 - src: geerlingguy.git                # https://github.com/geerlingguy/ansible-role-git
-- src: apolloclark.osquery            # https://github.com/apolloclark/ansible-role-osquery
+# - src: apolloclark.osquery            # https://github.com/apolloclark/ansible-role-osquery
 - src: apolloclark.filebeat           # https://github.com/apolloclark/ansible-role-filebeat
 - src: apolloclark.metricbeat         # https://github.com/apolloclark/ansible-role-metricbeat
 - src: apolloclark.heartbeat          # https://github.com/apolloclark/ansible-role-heartbeat
