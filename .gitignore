@@ -1,6 +1,6 @@
 .project
 .vagrant
-.rspect
+.rspec
 Gemfile.lock
 
 **/ansible/roles/*
