@@ -3,6 +3,9 @@
 # set the session to be noninteractive
 export DEBIAN_FRONTEND="noninteractive"
 
+# record the start time
+start=`date +%s`
+
 ### set region
 export AWS_REGION="us-east-1"
 
@@ -25,7 +28,13 @@ packer validate packer.json
 
 packer inspect packer.json
 
-packer build packer.json
+packer build -only=amazon-ebs packer.json
 
+# print AMI ID
 export BUILD_AMI_ID=$(jq '.builds[-1].artifact_id' -r manifest.json | cut -d':' -f2);
 echo $BUILD_AMI_ID;
+
+# print total build time
+end=`date +%s`
+secs=$((end-start))
+printf 'runtime = %02dh:%02dm:%02ds\n' $(($secs/3600)) $(($secs%3600/60)) $(($secs%60))

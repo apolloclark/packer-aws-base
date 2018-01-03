@@ -12,10 +12,6 @@ firewall_allowed_tcp_ports:
 
 
 
-# apolloclark/osquery
-osquery:
-  version: "2.10.2-1.linux"
-
 # apolloclark/filebeat
 filebeat:
  version: "5.6.5"
@@ -35,3 +31,7 @@ heartbeat:
 packetbeat:
   version: "5.6.5"
   install_only: "true"
+
+# apolloclark/osquery
+osquery:
+  version: "2.10.2-1.linux"

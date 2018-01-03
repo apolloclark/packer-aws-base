@@ -41,15 +41,18 @@ Vagrant.configure(2) do |config|
         ansible.provisioning_path = "/vagrant"
         ansible.galaxy_role_file = "requirements.yml"
         ansible.playbook = "playbook.yml"
-        ansible.extra_vars = "vars.yml"
-        ansible.sudo = true
+        # ansible.extra_vars = "vars.yml"
+        # ansible.verbose = true
     end
     
     # Verify the components are installed and running
     # https://github.com/vvchik/vagrant-serverspec
     config.vm.provision "serverspec" do |spec|
       
-      # pattern for specfiles to search
-      spec.pattern = 'serverspec/*_spec.rb'
+        # pattern for specfiles to search
+        spec.pattern = 'spec/*/*_spec.rb'
+        
+        # this plugin uses it's own custom Rakefile, but will reuse any existing
+        # spec_helper.rb script
     end
 end
