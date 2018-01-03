@@ -1,13 +1,19 @@
 # packer-aws-base
 
-Packer based demo of provisioning a base image using Ansible, for AWS, with Elastic monitoring.
+Packer based project for provisioning a base image using Ansible and Serverspc,
+for AWS, or Virtualbox, with Elastic monitoring.
 
-## Deploy Locally, with Vagrant
-```shell
-git clone https://github.com/apolloclark/packer-aws-base
-vagrant up
-vagrant ssh
-```
+## Requirements
+
+To use this project, you must have installed:
+- [Packer](https://www.packer.io/downloads.html)
+- [Ansible](http://docs.ansible.com/ansible/latest/intro_installation.html)
+- [Serverspec](http://serverspec.org/)
+- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/installing.html)
+
+(Optional)
+- [Virtualbox](https://www.virtualbox.org/wiki/Downloads)
+- [Vagrant](https://www.vagrantup.com/downloads.html)
 
 ## Deploy Locally, with Packer
 ```shell
@@ -22,11 +28,17 @@ git clone https://github.com/apolloclark/packer-aws-base
 ./build_packer_aws.sh
 ```
 
-## Ansible
+## Deploy Locally, with Vagrant
+```shell
+git clone https://github.com/apolloclark/packer-aws-base
+vagrant up
+vagrant ssh
+```
+
+## Ansible Roles
 
 Ansible Roles:
 - geerlingguy.firewall
-- geerlingguy.ntp
 - geerlingguy.git
 - apolloclark.osquery
 - apolloclark.filebeat
