@@ -20,6 +20,7 @@ end
 # retrieve the hostname
 host = ENV['TARGET_HOST']
 puts "host =  '#{host}'"
+p ENV
 
 
 
@@ -32,7 +33,7 @@ if match = /running/.match(vagrant_status)
   vagrant_run = ENV['VAGRANT_INSTALLER_VERSION'] || 'none'
   if vagrant_run != "2"
     
-    puts "manual serverspec run..."
+    puts "vagrant, manual serverspec run..."
     host = "default"
   
     # retrieve the vagrant ssh config
@@ -56,31 +57,57 @@ packer_status = ENV['PACKER_RUN_UUID'] || 'none'
 if packer_status != 'none'
   puts "packer run detected..."
   
-  # retrieve the dynamic SSH port set by Packer in Virtualbox
-  ssh_port=`vboxmanage showvminfo #{host} --machinereadable | grep "Forwarding"`
-  ssh_port = ssh_port.split(',')
-  ssh_port = ssh_port[3].to_i
-
-  # set the host and hostname to local
-  host = "127.0.0.1"
-
-  # configure the SSH connection for serverspec
-  options = Net::SSH::Config.for(host)
-  options[:auth_methods]  = ['none','publickey','password']
-  options[:host_name]     = host
-  options[:user]          = "vagrant"
-  options[:port]          = ssh_port
-  options[:password]      = "vagrant"
-  options[:user_known_hosts_file] = "/dev/null"
-  options[:keys]          = [
-    "~/.ssh/vagrant.pub",
-    "~/.ssh/vagrant.pem"
-  ]
-  options[:keys_only]     = false
-
-  set :host, host
-  set :ssh_options, options
-  p options, host, ssh_port
+  # retrieve the packer mode
+  packer_builder = ENV['PACKER_BUILDER'] || 'none'
+  
+  # attempt to fail early
+  if packer_builder == 'none'
+    puts "ERROR: PACKER_BUILDER env variable not set"
+    exit 1
+    
+  # check for a virtualbox run
+  elsif packer_builder == "virtualbox-iso"
+    puts "packer, virtualbox run detected..."
+    
+    # retrieve the VM_NAME
+    vm_name = ENV['VM_NAME'] || 'none'
+    
+    # ensure VM_NAME is set
+    if vm_name == 'none'
+      puts "ERROR: VM_NAME env variable not set"
+      exit 1
+    end
+    
+    # retrieve the dynamic SSH port set by Packer in Virtualbox
+    ssh_port=`vboxmanage showvminfo #{vm_name} --machinereadable | grep "Forwarding"`
+    ssh_port = ssh_port.split(',')
+    ssh_port = ssh_port[3].to_i
+  
+    # set the host and hostname to local
+    host = "127.0.0.1"
+  
+    # configure the SSH connection for serverspec
+    options = Net::SSH::Config.for(host)
+    options[:auth_methods]  = ['none','publickey','password']
+    options[:host_name]     = host
+    options[:user]          = "vagrant"
+    options[:port]          = ssh_port
+    options[:password]      = "vagrant"
+    options[:user_known_hosts_file] = "/dev/null"
+    options[:keys]          = [
+      "~/.ssh/vagrant.pub",
+      "~/.ssh/vagrant.pem"
+    ]
+    options[:keys_only]     = false
+  
+    set :host, host
+    set :ssh_options, options
+    p options, host, ssh_port
+  elsif packer_builder == "amazon-ebs"
+    puts "packer, amazon-ebs run detected..."
+    p ENV['AMI_NAME']
+    exit 0
+  end
 end
 
 

@@ -43,7 +43,6 @@
   "builders": [
     {
       "type": "amazon-ebs",
-      "name": "Packer AMI Builder",
       "region": "{{user `aws_region`}}",
       "source_ami_filter": {
           "filters": {
@@ -150,7 +149,8 @@
         "script/vagrant.sh",
         "script/sshd.sh",
         "script/virtualbox.sh"
-      ]
+      ],
+      "only": ["virtualbox-iso"]
     },
     {
       "type": "shell-local",
@@ -163,13 +163,20 @@
     },
     {
       "type": "shell-local",
-  	  "command": "export TARGET_HOST={{user `vm_name`}}; rake spec"
+  	  "command": "export PACKER_BUILDER='virtualbox-iso'; export VM_NAME='{{ user `vm_name` }}'; rake spec",
+      "only": ["virtualbox-iso"]
+    },
+    {
+      "type": "shell-local",
+  	  "command": "export PACKER_BUILDER='amazon-ebs'; export AMI_NAME='{{ user `ami_name` }}'; rake spec",
+      "only": ["amazon-ebs"]
     },
     {
       "type": "shell",
       "inline": [
         "rm -f .ssh/authorized_keys ; sudo rm -f /root/.ssh/authorized_keys"
-      ]
+      ],
+      "only": ["virtualbox-iso"]
     }
   ],
   "post-processors": [
