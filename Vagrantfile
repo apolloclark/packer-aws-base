@@ -22,7 +22,7 @@ Vagrant.configure(2) do |config|
         # Windows supports: smb
         # Mac supports: rsync, nfs
         # override.vm.synced_folder host_folder.to_s, guest_folder.to_s, type: "smb"
-        override.vm.synced_folder "./ansible", "/vagrant"
+        # override.vm.synced_folder "./ansible", "/vagrant"
 
         # setup local apt-get cache
         if Vagrant.has_plugin?("vagrant-cachier")
@@ -36,23 +36,19 @@ Vagrant.configure(2) do |config|
     # Configure the box with Ansible, running within the Guest Machine
     # https://www.vagrantup.com/docs/provisioning/ansible.html
     # https://www.vagrantup.com/docs/provisioning/ansible_common.html
-    # https://www.vagrantup.com/docs/provisioning/ansible_local.html
-    config.vm.provision "ansible_local" do |ansible|
-        ansible.provisioning_path = "/vagrant"
-        ansible.galaxy_role_file = "requirements.yml"
-        ansible.playbook = "playbook.yml"
-        # ansible.extra_vars = "vars.yml"
-        # ansible.verbose = true
+    config.vm.provision "ansible" do |ansible|
+        ansible.galaxy_role_file = "./ansible/requirements.yml"
+        ansible.playbook = "./ansible/playbook.yml"
     end
     
     # Verify the components are installed and running
     # https://github.com/vvchik/vagrant-serverspec
+    # This plugin uses it's own custom Rakefile, but will reuse any existing
+    # local spec_helper.rb script
     config.vm.provision "serverspec" do |spec|
       
         # pattern for specfiles to search
         spec.pattern = 'spec/*/*_spec.rb'
         
-        # this plugin uses it's own custom Rakefile, but will reuse any existing
-        # spec_helper.rb script
     end
 end
