@@ -152,7 +152,9 @@
       	"script/update.sh",
         "script/vagrant.sh",
         "script/sshd.sh",
-        "script/virtualbox.sh"
+        "script/virtualbox.sh",
+        "script/minimize.sh",
+        "script/cleanup.sh"
       ],
       "expect_disconnect": true,
       "only": ["virtualbox-iso"]
