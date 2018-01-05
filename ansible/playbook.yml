@@ -16,3 +16,4 @@
     - apolloclark.metricbeat
     - apolloclark.heartbeat
     - apolloclark.packetbeat
+    - apolloclark.nano-highlighting

@@ -7,3 +7,4 @@
 - src: apolloclark.metricbeat         # https://github.com/apolloclark/ansible-role-metricbeat
 - src: apolloclark.heartbeat          # https://github.com/apolloclark/ansible-role-heartbeat
 - src: apolloclark.packetbeat         # https://github.com/apolloclark/ansible-role-packetbeat
+- src: apolloclark.nano-highlighting  # https://github.com/apolloclark/ansible-role-nano-highlighting
