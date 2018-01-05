@@ -3,7 +3,7 @@ start=`date +%s`
 
 packer build -only=virtualbox-iso \
 	-var-file=ubuntu1604.json \
-	-var 'iso_path=/home/apollo/Downloads/vm_source/' \
+	-var "iso_path=$HOME/Downloads/vm_source/" \
 	packer.json
 
 end=`date +%s`

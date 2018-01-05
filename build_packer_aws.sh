@@ -22,6 +22,12 @@ export BUILD_SUBNET_ID=$(aws ec2 describe-subnets \
 	--output text);
 echo $BUILD_SUBNET_ID;
 
+### set the ssh keyname and file
+export SSH_KEYPAIR_NAME="packer"
+export SSH_PRIVATE_KEY_FILE="$HOME/.ssh/packer.pem"
+
+
+
 ### build Packer AMI
 
 packer validate packer.json

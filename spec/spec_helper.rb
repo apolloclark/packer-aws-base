@@ -20,7 +20,6 @@ end
 # retrieve the hostname
 host = ENV['TARGET_HOST']
 puts "host =  '#{host}'"
-p ENV
 
 
 
@@ -57,7 +56,7 @@ packer_status = ENV['PACKER_RUN_UUID'] || 'none'
 if packer_status != 'none'
   puts "packer run detected..."
   
-  # retrieve the packer mode
+  # retrieve the packer_builder
   packer_builder = ENV['PACKER_BUILDER'] || 'none'
   
   # attempt to fail early
@@ -65,7 +64,7 @@ if packer_status != 'none'
     puts "ERROR: PACKER_BUILDER env variable not set"
     exit 1
     
-  # check for a virtualbox run
+  # check for a virtualbox-iso run
   elsif packer_builder == "virtualbox-iso"
     puts "packer, virtualbox run detected..."
     
@@ -86,13 +85,13 @@ if packer_status != 'none'
     # set the host and hostname to local
     host = "127.0.0.1"
   
-    # configure the SSH connection for serverspec
+    # configure the SSH connection
     options = Net::SSH::Config.for(host)
-    options[:auth_methods]  = ['none','publickey','password']
     options[:host_name]     = host
-    options[:user]          = "vagrant"
     options[:port]          = ssh_port
+    options[:user]          = "vagrant"
     options[:password]      = "vagrant"
+    options[:auth_methods]  = ['none','publickey','password']
     options[:user_known_hosts_file] = "/dev/null"
     options[:keys]          = [
       "~/.ssh/vagrant.pub",
@@ -103,10 +102,49 @@ if packer_status != 'none'
     set :host, host
     set :ssh_options, options
     p options, host, ssh_port
+    
+  # check for an amazon-ebs run
   elsif packer_builder == "amazon-ebs"
     puts "packer, amazon-ebs run detected..."
-    p ENV['AMI_NAME']
-    exit 0
+    
+    # retrieve AMI_NAME
+    ami_name = ENV['AMI_NAME'] || 'none'
+    
+    # ensure AMI_NAME is set
+    if ami_name == 'none'
+      puts "ERROR: AMI_NAME env variable not set"
+      exit 1
+    end
+    
+    # retrieve the keypair filename
+    ssh_private_key_file = ENV['SSH_PRIVATE_KEY_FILE'] || 'none'
+    
+    # ensure SSH_PRIVATE_KEY_FILE is set
+    if ssh_private_key_file == 'none'
+      puts "ERROR: SSH_PRIVATE_KEY_FILE env variable not set"
+      exit 1
+    end
+
+    # retrieve AMI IP
+    aws_ip=`aws ec2 describe-instances \
+      --filters Name=instance-state-name,Values=running,Name=tag:Name,Values='#{ami_name}' \
+      --query 'Reservations[].Instances[].PublicIpAddress' \
+      --output text`
+    host = aws_ip
+  
+    # configure the SSH connection
+    options = Net::SSH::Config.for(host)
+    options[:host_name]     = host
+    options[:user]          = "ubuntu"
+    options[:port]          = 22
+    options[:auth_methods]  = ['none','publickey','password']
+    options[:keys]          = [
+      ssh_private_key_file
+    ]
+  
+    set :host, host
+    set :ssh_options, options
+    # p ami_name, aws_ip, options, host, ssh_private_key_file
   end
 end
 

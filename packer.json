@@ -4,6 +4,8 @@
     "vpc": "{{env `BUILD_VPC_ID`}}",
     "subnet": "{{env `BUILD_SUBNET_ID`}}",
     "aws_region": "{{env `AWS_REGION`}}",
+    "ssh_keypair_name": "{{env `SSH_KEYPAIR_NAME`}}",
+    "ssh_private_key_file": "{{env `SSH_PRIVATE_KEY_FILE`}}",
     "ami_name": "packer-aws-base-{{isotime \"2006-01-02_15-04-06\"}}",
     "atlas_token": "{{ env `ATLAS_TOKEN` }}",
     "boot_command_prefix": "<enter><wait><f6><esc><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
@@ -32,7 +34,7 @@
     "ssh_fullname": "vagrant",
     "ssh_password": "vagrant",
     "ssh_username": "vagrant",
-    "update": "false",
+    "update": "true",
     "vagrantfile_template": "",
     "version": "0.1.0",
     "virtualbox_guest_os_type": "Ubuntu_64",
@@ -55,6 +57,8 @@
       },
       "instance_type": "t2.micro",
       "ssh_username": "ubuntu",
+      "ssh_keypair_name": "{{user `ssh_keypair_name`}}",
+      "ssh_private_key_file": "{{user `ssh_private_key_file`}}",
       "ami_name": "{{user `ami_name` | clean_ami_name}}",
       "tags": {
         "Name": "{{user `ami_name`}}"
@@ -111,7 +115,7 @@
       "shutdown_command": "echo '{{ user `ssh_password` }}'|sudo -S shutdown -P now",
       "ssh_password": "{{ user `ssh_password` }}",
       "ssh_username": "{{ user `ssh_username` }}",
-      "ssh_wait_timeout": "10000s",
+      "ssh_wait_timeout": "600s",
       "vboxmanage": [
         [
           "modifyvm", "{{.Name}}", "--nictype1", "virtio"
@@ -150,7 +154,16 @@
         "script/sshd.sh",
         "script/virtualbox.sh"
       ],
+      "expect_disconnect": true,
       "only": ["virtualbox-iso"]
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "sudo apt-get update",
+        "sudo apt-get install -y python-minimal aptitude"
+      ],
+      "only": ["amazon-ebs"]
     },
     {
       "type": "shell-local",
@@ -159,7 +172,14 @@
     {
       "type": "ansible",
       "user": "{{ user `ansible_user` }}",
-      "playbook_file": "./ansible/playbook.yml"
+      "playbook_file": "./ansible/playbook.yml",
+      "only": ["virtualbox-iso"]
+    },
+    {
+      "type": "ansible",
+      "user": "ubuntu",
+      "playbook_file": "./ansible/playbook.yml",
+      "only": ["amazon-ebs"]
     },
     {
       "type": "shell-local",
@@ -168,7 +188,7 @@
     },
     {
       "type": "shell-local",
-  	  "command": "export PACKER_BUILDER='amazon-ebs'; export AMI_NAME='{{ user `ami_name` }}'; rake spec",
+  	  "command": "export PACKER_BUILDER='amazon-ebs'; export AMI_NAME='{{ user `ami_name` }}'; export SSH_PRIVATE_KEY_FILE='{{ user `ssh_private_key_file` }}'; rake spec",
       "only": ["amazon-ebs"]
     },
     {
@@ -177,6 +197,13 @@
         "rm -f .ssh/authorized_keys ; sudo rm -f /root/.ssh/authorized_keys"
       ],
       "only": ["virtualbox-iso"]
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "sudo rm -rf /home/ubuntu/.ssh/*"
+      ],
+      "only": ["amazon-ebs"]
     }
   ],
   "post-processors": [
