@@ -104,6 +104,14 @@
   ],
   "provisioners": [
     {
+      "type": "shell",
+      "inline": [
+        "sudo apt-get update",
+        "sudo apt-get install -y python-minimal aptitude"
+      ],
+      "only": ["amazon-ebs"]
+    },
+    {
       "type": "shell-local",
   	  "command": "ansible-galaxy install --force -v --roles-path='./ansible/roles' --role-file='./ansible/requirements.yml'"
     },
