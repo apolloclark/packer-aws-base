@@ -121,7 +121,7 @@
     },
     {
       "type": "shell-local",
-  	  "command": "export PACKER_BUILDER='virtualbox-iso'; export VM_NAME='{{ user `vm_name` }}'; rake spec",
+  	  "command": "export PACKER_BUILDER='virtualbox-ovf'; export VM_NAME='{{ user `vm_name` }}'; rake spec",
       "only": ["virtualbox-ovf"]
     },
     {

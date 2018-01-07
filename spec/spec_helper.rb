@@ -64,8 +64,8 @@ if packer_status != 'none'
     puts "ERROR: PACKER_BUILDER env variable not set"
     exit 1
     
-  # check for a virtualbox-iso run
-  elsif packer_builder == "virtualbox-iso"
+  # check for a virtualbox-ovf run
+  elsif packer_builder == "virtualbox-ovf"
     puts "packer, virtualbox run detected..."
     
     # retrieve the VM_NAME
