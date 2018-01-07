@@ -1,7 +1,7 @@
 # packer-aws-base
 
-Packer based project for provisioning a base image using Ansible and Serverspc,
-for AWS, or Virtualbox, with Elastic monitoring.
+Packer based project for provisioning a "base" image using Ansible remote, 
+and Serverspc, for AWS, or Virtualbox, with Elastic monitoring.
 
 ## Requirements
 
@@ -16,20 +16,20 @@ To use this project, you must have installed:
 - [Virtualbox](https://www.virtualbox.org/wiki/Downloads)
 - [Vagrant](https://www.vagrantup.com/downloads.html)
 
+## Deploy to AWS, with Packer
+```shell
+git clone https://github.com/apolloclark/packer-aws-base
+cd packer-aws-base
+# create a keypair named "packer" or change lines 26, 27 in build_packer_aws.sh
+./build_packer_aws.sh
+```
+
 ## Deploy Locally, with Packer
 ```shell
 git clone https://github.com/apolloclark/packer-aws-base
 cd packer-aws-base
 # change line 6 in build_packer_virtualbox.sh to a folder with an Ubuntu 16.04 ISO
 ./build_packer_virtualbox.sh
-```
-
-## Deploy to AWS
-```shell
-git clone https://github.com/apolloclark/packer-aws-base
-cd packer-aws-base
-# create a keypair named "packer" or change lines 26, 27 in build_packer_aws.sh
-./build_packer_aws.sh
 ```
 
 ## Deploy Locally, with Vagrant
@@ -42,10 +42,11 @@ vagrant ssh
 ## Ansible Roles
 
 Ansible Roles:
-- geerlingguy.firewall
-- geerlingguy.git
-- apolloclark.osquery
-- apolloclark.filebeat
-- apolloclark.metricbeat
-- apolloclark.heartbeat
-- apolloclark.packetbeat
+- [geerlingguy.firewall](https://github.com/geerlingguy/ansible-role-firewall)
+- [geerlingguy.git](https://github.com/geerlingguy/ansible-role-git)
+- [apolloclark.nano-highlighting](https://github.com/apolloclark/ansible-role-nano-highlighting)
+- [apolloclark.osquery](https://github.com/apolloclark/ansible-role-osquery)
+- [apolloclark.filebeat](https://github.com/apolloclark/ansible-role-filebeat)
+- [apolloclark.metricbeat](https://github.com/apolloclark/ansible-role-metricbeat)
+- [apolloclark.heartbeat](https://github.com/apolloclark/ansible-role-heartbeat)
+- [apolloclark.packetbeat](https://github.com/apolloclark/ansible-role-packetbeat)
