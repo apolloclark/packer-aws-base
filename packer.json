@@ -8,8 +8,6 @@
     "ssh_private_key_file": "{{env `SSH_PRIVATE_KEY_FILE`}}",
     "ami_name": "packer-aws-base-{{isotime \"2006-01-02_15-04-06\"}}",
     "atlas_token": "{{ env `ATLAS_TOKEN` }}",
-    "boot_command_prefix": "<enter><wait><f6><esc><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-    "cleanup_pause": "",
     "cpus": "1",
     "custom_script": "custom-script.sh",
     "desktop": "false",
@@ -31,6 +29,7 @@
     "preseed" : "preseed.cfg",
     "rsync_proxy": "{{env `rsync_proxy`}}",
     "hostname": "vagrant",
+    "source_path": "../packer-ubuntu/output-ubuntu1604-virtualbox-iso/ubuntu1604.ovf",
     "ssh_fullname": "vagrant",
     "ssh_password": "vagrant",
     "ssh_username": "vagrant",
@@ -78,39 +77,11 @@
       "subnet_id": "{{user `subnet`}}"
     },
     {
-      "type": "virtualbox-iso",
-      "boot_command": [
-        "{{ user `boot_command_prefix` }}",
-        "/install/vmlinuz noapic ",
-        "initrd=/install/initrd.gz ",
-        "file=/floppy/{{ user `preseed` }} ",
-        "debian-installer=en_US auto locale=en_US kbd-chooser/method=us ",
-        "hostname={{ user `hostname` }} ",
-        "grub-installer/bootdev=/dev/sda<wait> ",
-        "fb=false debconf/frontend=noninteractive ",
-        "keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA ",
-        "keyboard-configuration/variant=USA console-setup/ask_detect=false ",
-        "passwd/user-fullname={{ user `ssh_fullname` }} ",
-        "passwd/user-password={{ user `ssh_password` }} ",
-        "passwd/user-password-again={{ user `ssh_password` }} ",
-        "passwd/username={{ user `ssh_username` }} ",
-        "-- <enter>"
-      ],
-      "disk_size": "{{ user `disk_size` }}",
-      "floppy_files": [
-        "http/{{ user `preseed` }}"
-      ],
+      "type": "virtualbox-ovf",
+      "source_path": "{{ user `source_path` }}",
       "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
-      "guest_os_type": "{{ user `virtualbox_guest_os_type` }}",
-      "hard_drive_interface": "sata",
       "headless": "{{ user `headless` }}",
-      "iso_checksum": "{{ user `iso_checksum` }}",
-      "iso_checksum_type": "{{ user `iso_checksum_type` }}",
-      "iso_urls": [
-        "{{ user `iso_path` }}/{{ user `iso_name` }}",
-        "{{ user `iso_url` }}"
-      ],
-      "output_directory": "output-{{ user `vm_name` }}-virtualbox-iso",
+      "output_directory": "output-{{ user `vm_name` }}-virtualbox-ovf",
       "post_shutdown_delay": "1m",
       "shutdown_command": "echo '{{ user `ssh_password` }}'|sudo -S shutdown -P now",
       "ssh_password": "{{ user `ssh_password` }}",
@@ -133,41 +104,6 @@
   ],
   "provisioners": [
     {
-      "environment_vars": [
-        "CLEANUP_PAUSE={{user `cleanup_pause`}}",
-        "DESKTOP={{user `desktop`}}",
-        "UPDATE={{user `update`}}",
-        "INSTALL_VAGRANT_KEY={{user `install_vagrant_key`}}",
-        "SSH_USERNAME={{user `ssh_username`}}",
-        "SSH_PASSWORD={{user `ssh_password`}}",
-        "http_proxy={{user `http_proxy`}}",
-        "https_proxy={{user `https_proxy`}}",
-        "ftp_proxy={{user `ftp_proxy`}}",
-        "rsync_proxy={{user `rsync_proxy`}}",
-        "no_proxy={{user `no_proxy`}}"
-      ],
-      "type": "shell",
-      "execute_command": "echo '{{ user `ssh_password` }}' | {{.Vars}} sudo -E -S bash '{{.Path}}'",
-      "scripts": [
-      	"script/update.sh",
-        "script/vagrant.sh",
-        "script/sshd.sh",
-        "script/virtualbox.sh",
-        "script/minimize.sh",
-        "script/cleanup.sh"
-      ],
-      "expect_disconnect": true,
-      "only": ["virtualbox-iso"]
-    },
-    {
-      "type": "shell",
-      "inline": [
-        "sudo apt-get update",
-        "sudo apt-get install -y python-minimal aptitude"
-      ],
-      "only": ["amazon-ebs"]
-    },
-    {
       "type": "shell-local",
   	  "command": "ansible-galaxy install --force -v --roles-path='./ansible/roles' --role-file='./ansible/requirements.yml'"
     },
@@ -175,7 +111,7 @@
       "type": "ansible",
       "user": "{{ user `ansible_user` }}",
       "playbook_file": "./ansible/playbook.yml",
-      "only": ["virtualbox-iso"]
+      "only": ["virtualbox-ovf"]
     },
     {
       "type": "ansible",
@@ -186,7 +122,7 @@
     {
       "type": "shell-local",
   	  "command": "export PACKER_BUILDER='virtualbox-iso'; export VM_NAME='{{ user `vm_name` }}'; rake spec",
-      "only": ["virtualbox-iso"]
+      "only": ["virtualbox-ovf"]
     },
     {
       "type": "shell-local",
@@ -198,7 +134,7 @@
       "inline": [
         "rm -f .ssh/authorized_keys ; sudo rm -f /root/.ssh/authorized_keys"
       ],
-      "only": ["virtualbox-iso"]
+      "only": ["virtualbox-ovf"]
     },
     {
       "type": "shell",
@@ -216,7 +152,7 @@
     },
 	{
 	  "type": "vagrant",
-	  "keep_input_artifact": false,
+	  "keep_input_artifact": true,
       "output": "box/{{.Provider}}/{{user `vm_name`}}-{{user `version`}}.box",
 	  "vagrantfile_template": "{{ user `vagrantfile_template` }}"
 	}

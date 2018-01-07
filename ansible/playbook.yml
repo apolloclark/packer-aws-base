@@ -11,9 +11,10 @@
   roles:
     - geerlingguy.firewall
     - geerlingguy.git
+    - apolloclark.nano-highlighting
+
     - apolloclark.osquery
     - apolloclark.filebeat
     - apolloclark.metricbeat
     - apolloclark.heartbeat
     - apolloclark.packetbeat
-    - apolloclark.nano-highlighting

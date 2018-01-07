@@ -1,7 +1,7 @@
 #!/bin/bash -eux
 start=`date +%s`
 
-packer build -only=virtualbox-iso \
+packer build -only=virtualbox-ovf \
 	-var-file=ubuntu1604.json \
 	-var "iso_path=$HOME/Downloads/vm_source/" \
 	packer.json
