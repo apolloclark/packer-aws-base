@@ -2,7 +2,7 @@
 start=`date +%s`
 
 # remove old OVF file
-rm -rf ./output-*-virtualbox-iso
+rm -rf ./output-*-virtualbox-ovf
 
 packer build -only=virtualbox-ovf \
 	-var-file=ubuntu1604.json \
