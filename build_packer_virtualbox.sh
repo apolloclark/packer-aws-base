@@ -6,7 +6,7 @@ rm -rf ./output-*-virtualbox-ovf
 
 packer build -only=virtualbox-ovf \
 	-var-file=ubuntu1604.json \
-	packer.json
+	packer_virtualbox.json
 
 end=`date +%s`
 secs=$((end-start))
