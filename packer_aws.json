@@ -1,14 +1,11 @@
 {
   "variables": {
-    "ansible_roles_path": "./ansible/roles",
     "vpc": "{{env `BUILD_VPC_ID`}}",
     "subnet": "{{env `BUILD_SUBNET_ID`}}",
     "aws_region": "{{env `AWS_REGION`}}",
     "ssh_keypair_name": "{{env `SSH_KEYPAIR_NAME`}}",
     "ssh_private_key_file": "{{env `SSH_PRIVATE_KEY_FILE`}}",
     "ami_name": "packer-aws-base-{{isotime \"2006-01-02_15-04-06\"}}",
-    "hostname": "vagrant",
-    "ssh_username": "vagrant",
     "version": "{{isotime \"20060102.030405\"}}"
   },
   "builders": [
@@ -45,7 +42,8 @@
       "associate_public_ip_address": "true",
       "vpc_id": "{{user `vpc`}}",
       "subnet_id": "{{user `subnet`}}"
-    }  ],
+    }
+  ],
   "provisioners": [
     {
       "type": "shell",
