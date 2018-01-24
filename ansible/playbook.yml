@@ -12,6 +12,7 @@
     - geerlingguy.firewall
     - geerlingguy.git
     - apolloclark.nano-highlighting
+    - apolloclark.aws-cli
 
     - apolloclark.osquery
     - apolloclark.filebeat
