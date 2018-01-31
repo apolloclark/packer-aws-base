@@ -53,8 +53,9 @@
       "type": "shell",
       "inline": [
         "sudo apt-get update",
-        "sudo apt-get install -y python-minimal aptitude",
+        "sudo apt-get install -y aptitude python-minimal python-pip",
         "sudo pip install ansible",
+        "sudo pip install pip --upgrade",
         "echo 'PATH=\"/root/bin:/root/.local/bin:$PATH\"' | sudo tee --append /root/.profile"
       ]
     },
