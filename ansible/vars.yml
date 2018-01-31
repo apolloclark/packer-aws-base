@@ -10,6 +10,10 @@ firewall_allowed_tcp_ports:
   - "22"
   - "25"
 
+# apolloclark/aws-cli
+awscli:
+  pip_user: "ubuntu"
+
 
 
 # apolloclark/filebeat
