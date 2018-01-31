@@ -3,7 +3,7 @@
     "ansible_roles_path": "./ansible/roles",
     "atlas_token": "{{ env `ATLAS_TOKEN` }}",
     "cpus": "1",
-    "headless": "",
+    "headless": "true",
     "memory": "1024",
     "hostname": "vagrant",
     "source_path": "../packer-ubuntu/output-ubuntu1604-virtualbox-iso/ubuntu1604.ovf",
@@ -41,6 +41,14 @@
     }
   ],
   "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+      	"sudo adduser ubuntu --quiet --gecos \"ubuntu\" --shell /bin/bash --disabled-password",
+        "sudo usermod -aG sudo ubuntu",
+      	"sudo cat /etc/group | grep ubuntu"
+      ]
+    },
     {
       "type": "shell-local",
   	  "command": "ansible-galaxy install --force -v --roles-path='./ansible/roles' --role-file='./ansible/requirements.yml'"
