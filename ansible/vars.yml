@@ -13,8 +13,8 @@ firewall_allowed_tcp_ports:
 # apolloclark/aws-cli
 awscli:
   pip_user: 
-    - "ubuntu"
-    - "root"
+    - root
+    - ubuntu
 
 
 
