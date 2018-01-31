@@ -49,8 +49,10 @@
       "type": "shell",
       "inline": [
         "sudo apt-get update",
-        "sudo apt-get install -y python-minimal aptitude"
-      ]    },
+        "sudo apt-get install -y python-minimal aptitude",
+        "sudo echo 'PATH=\"/root/bin:/root/.local/bin:$PATH\"' >> /root/.profile"
+      ]
+    },
     {
       "type": "shell-local",
   	  "command": "ansible-galaxy install --force -v --roles-path='./ansible/roles' --role-file='./ansible/requirements.yml'"
