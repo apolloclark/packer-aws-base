@@ -1,6 +1,7 @@
 .project
 .vagrant
 .rspec
+.git
 manifest.json
 vagrant.json
 Gemfile.lock
