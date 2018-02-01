@@ -177,7 +177,7 @@ Packages = {
     version: '5.6.5'
   },
   'osquery' => {
-    version: '2.10.2-1.linux'
+    version: '2.11.0-1.linux'
   }
 }
 
