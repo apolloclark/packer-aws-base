@@ -52,7 +52,7 @@
       "type": "shell",
       "inline": [
         "sudo apt-get update",
-        "sudo apt-get install -y aptitude python-minimal python-pip git",
+        "sudo apt-get install -y aptitude jq python-minimal python-pip git",
         "sudo -H pip install pip --upgrade",
         "sudo -H pip install git+https://github.com/ansible/ansible.git@devel boto3",
         "echo 'PATH=\"/root/bin:/root/.local/bin:$PATH\"' | sudo tee --append /root/.profile"
@@ -68,15 +68,20 @@
       "playbook_file": "./ansible/playbook.yml"
     },
     {
+      "type": "shell",
+      "inline": [
+        "sudo su - root -c 'rvm -v' 2>/dev/null",
+        "sudo su - root -c  'ruby -v' 2>/dev/null",
+        "sudo su - root -c  'gem install serverspec' 2>/dev/null"
+      ]
+    },
+    {
       "type": "shell-local",
   	  "command": "export PACKER_BUILDER='virtualbox-ovf'; export VM_NAME='{{ user `vm_name` }}'; rake spec"
     },
     {
       "type": "shell",
       "inline": [
-        "sudo su - root -c 'rvm -v' 2>/dev/null",
-        "sudo su - root -c  'ruby -v' 2>/dev/null",
-        "sudo su - root -c  'gem install serverspec' 2>/dev/null",
         "sudo rm -f .ssh/authorized_keys ; sudo rm -f /root/.ssh/authorized_keys"
       ]
     }
