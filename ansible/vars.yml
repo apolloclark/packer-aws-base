@@ -26,22 +26,27 @@ rvm1_install_path: /usr/local/rvm
 
 # apolloclark/filebeat
 filebeat:
- version: "5.6.5"
+ version: "6.3.2"
  install_only: "true"
 
 # apolloclark/metricbeat
 metricbeat:
- version: "5.6.5"
+ version: "6.3.2"
  install_only: "true"
 
 # apolloclark/heartbeat
 heartbeat:
- version: "5.6.5"
+ version: "6.3.2"
  install_only: "true"
 
 # apolloclark/packetbeat
 packetbeat:
-  version: "5.6.5"
+  version: "6.3.2"
+  install_only: "true"
+
+# apolloclark/auditbeat
+auditbeat:
+  version: "6.3.2"
   install_only: "true"
 
 # apolloclark/osquery

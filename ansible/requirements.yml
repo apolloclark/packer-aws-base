@@ -10,3 +10,4 @@
 - src: apolloclark.metricbeat         # https://github.com/apolloclark/ansible-role-metricbeat
 - src: apolloclark.heartbeat          # https://github.com/apolloclark/ansible-role-heartbeat
 - src: apolloclark.packetbeat         # https://github.com/apolloclark/ansible-role-packetbeat
+- src: apolloclark.auditbeat          # https://github.com/apolloclark/ansible-role-auditbeat

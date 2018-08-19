@@ -20,3 +20,4 @@
     - apolloclark.metricbeat
     - apolloclark.heartbeat
     - apolloclark.packetbeat
+    - apolloclark.auditbeat
