@@ -165,16 +165,19 @@ end
 # Define packages
 Packages = {
   'filebeat' => {
-    version: '5.6.5'
+    version: '6.3.2'
   },
   'metricbeat' => {
-    version: '5.6.5'
+    version: '6.3.2'
   },
   'heartbeat' => {
-    version: '5.6.5'
+    version: '6.3.2'
   },
   'packetbeat' => {
-    version: '5.6.5'
+    version: '6.3.2'
+  },
+  'auditbeat' => {
+    version: '6.3.2'
   },
   'osquery' => {
     version: '2.11.0-1.linux'
