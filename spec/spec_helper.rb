@@ -170,7 +170,7 @@ Packages = {
   'metricbeat' => {
     version: '6.3.2'
   },
-  'heartbeat' => {
+  'heartbeat-elastic' => {
     version: '6.3.2'
   },
   'packetbeat' => {
