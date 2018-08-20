@@ -11,7 +11,7 @@
     "ssh_password": "vagrant",
     "ssh_username": "vagrant",
     "vagrantfile_template": "",
-    "vm_name": "ubuntu1404-beats",
+    "vm_name": "ubuntu1604-beats",
     "version": "{{isotime \"20060102.030405\"}}"
   },
   "builders": [
