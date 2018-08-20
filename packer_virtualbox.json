@@ -79,12 +79,6 @@
     {
       "type": "shell-local",
   	  "command": "export PACKER_BUILDER='virtualbox-ovf'; export VM_NAME='{{ user `vm_name` }}'; rake spec"
-    },
-    {
-      "type": "shell",
-      "inline": [
-        "sudo rm -f .ssh/authorized_keys ; sudo rm -f /root/.ssh/authorized_keys"
-      ]
     }
   ],
   "post-processors": [
