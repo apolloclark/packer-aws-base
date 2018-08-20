@@ -10,7 +10,7 @@ Vagrant.configure(2) do |config|
     config.vm.provider "virtualbox" do |vb, override|
 
         # set the VM name
-        vb.name = "packer-aws-base"
+        vb.name = "ubuntu16.04-beats"
 
         # set the CPU, memory, graphics
         # @see https://www.virtualbox.org/manual/ch08.html
@@ -40,7 +40,7 @@ Vagrant.configure(2) do |config|
         ansible.galaxy_role_file = "./ansible/requirements.yml"
         ansible.playbook = "./ansible/playbook.yml"
     end
-    
+
     # Verify the components are installed and running
     # https://github.com/vvchik/vagrant-serverspec
     # This plugin uses it's own custom Rakefile, but will reuse any existing
@@ -49,6 +49,5 @@ Vagrant.configure(2) do |config|
       
         # pattern for specfiles to search
         spec.pattern = 'spec/*/*_spec.rb'
-        
     end
 end

@@ -1,7 +1,7 @@
-# packer-aws-base
+# packer-aws-beats
 
-Packer based project for provisioning a "base" image using Ansible remote, 
-and Serverspc, for AWS, or Virtualbox, with Elastic monitoring.
+Packer based project for provisioning a "beats" image with Elastic Beats,
+using Ansible remote, and Serverspc, for AWS, or Virtualbox.
 
 ## Requirements
 
@@ -18,23 +18,24 @@ To use this project, you must have installed:
 
 ## Deploy to AWS, with Packer
 ```shell
-git clone https://github.com/apolloclark/packer-aws-base
-cd packer-aws-base
+git clone https://github.com/apolloclark/packer-aws-beats
+cd packer-aws-beats
 # create a keypair named "packer" or change lines 26, 27 in build_packer_aws.sh
 ./build_packer_aws.sh
 ```
 
 ## Deploy Locally, with Packer
 ```shell
-git clone https://github.com/apolloclark/packer-aws-base
-cd packer-aws-base
+git clone https://github.com/apolloclark/packer-aws-beats
+cd packer-aws-beats
 # change line 6 in build_packer_virtualbox.sh to a folder with an Ubuntu 16.04 ISO
 ./build_packer_virtualbox.sh
 ```
 
 ## Deploy Locally, with Vagrant
 ```shell
-git clone https://github.com/apolloclark/packer-aws-base
+git clone https://github.com/apolloclark/packer-aws-beats
+cd packer-aws-beats
 vagrant up
 vagrant ssh
 ```
@@ -50,3 +51,4 @@ Ansible Roles:
 - [apolloclark.metricbeat](https://github.com/apolloclark/ansible-role-metricbeat)
 - [apolloclark.heartbeat](https://github.com/apolloclark/ansible-role-heartbeat)
 - [apolloclark.packetbeat](https://github.com/apolloclark/ansible-role-packetbeat)
+- [apolloclark.auditbeat](https://github.com/apolloclark/ansible-role-auditbeat)
