@@ -184,10 +184,10 @@ Packages = {
   }
 }
 
-# Define Enabled services
-EnabledServices = [
+# Define Installed services
+InstalledServices = [
 ]
 
 # Define Running services
-RunningServices = [
+ActiveServices = [
 ]

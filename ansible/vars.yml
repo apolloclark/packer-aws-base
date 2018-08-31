@@ -18,6 +18,10 @@ awscli:
 
 
 
+# apolloclark/osquery
+osquery:
+  version: "2.11.0-1.linux"
+  
 # apolloclark/filebeat
 filebeat:
  version: "6.4.0"
@@ -42,7 +46,3 @@ packetbeat:
 auditbeat:
   version: "6.4.0"
   install_only: "true"
-
-# apolloclark/osquery
-osquery:
-  version: "2.11.0-1.linux"

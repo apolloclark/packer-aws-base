@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 # https://www.singlestoneconsulting.com/articles/writing-efficient-infrastructure-tests-with-serverspec
-
 # Verify packages
 Packages.each do |name, details|
   describe package(name) do
@@ -9,15 +8,15 @@ Packages.each do |name, details|
   end
 end
 
-# Verify enabled services
-EnabledServices.each do |name|
+# Verify services
+InstalledServices.each do |name|
   describe service(name) do
     it { should be_enabled }
   end
 end
 
-# Verify running services
-RunningServices.each do |name|
+# Verify services
+ActiveServices.each do |name|
   describe service(name) do
     it { should be_running }
   end
