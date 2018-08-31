@@ -16,37 +16,31 @@ awscli:
     - root
     - ubuntu
 
-# rvm_io.ruby
-rvm1_bundler_install: True
-rvm1_user: 'root'
-rvm1_rvm_version: 'stable'
-rvm1_install_path: /usr/local/rvm
-
 
 
 # apolloclark/filebeat
 filebeat:
- version: "6.3.2"
+ version: "6.4.0"
  install_only: "true"
 
 # apolloclark/metricbeat
 metricbeat:
- version: "6.3.2"
+ version: "6.4.0"
  install_only: "true"
 
 # apolloclark/heartbeat
 heartbeat:
- version: "6.3.2"
+ version: "6.4.0"
  install_only: "true"
 
 # apolloclark/packetbeat
 packetbeat:
-  version: "6.3.2"
+  version: "6.4.0"
   install_only: "true"
 
 # apolloclark/auditbeat
 auditbeat:
-  version: "6.3.2"
+  version: "6.4.0"
   install_only: "true"
 
 # apolloclark/osquery
