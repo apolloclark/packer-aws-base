@@ -5,7 +5,7 @@
     "aws_region": "{{env `AWS_REGION`}}",
     "ssh_keypair_name": "{{env `SSH_KEYPAIR_NAME`}}",
     "ssh_private_key_file": "{{env `SSH_PRIVATE_KEY_FILE`}}",
-    "ami_name": "packer-aws-base-{{isotime \"2006-01-02_15-04-06\"}}",
+    "ami_name": "packer-aws-beats-{{isotime \"2006-01-02_15-04-06\"}}",
     "version": "{{isotime \"20060102.030405\"}}"
   },
   "builders": [
@@ -46,16 +46,6 @@
   ],
   "provisioners": [
     {
-      "type": "shell",
-      "inline": [
-        "sudo apt-get update",
-        "sudo apt-get install -y aptitude jq python-minimal python-pip git",
-        "sudo -H pip install pip --upgrade",
-        "sudo -H pip install git+https://github.com/ansible/ansible.git@devel boto3",
-        "echo 'PATH=\"/root/bin:/root/.local/bin:$PATH\"' | sudo tee --append /root/.profile"
-      ]
-    },
-    {
       "type": "shell-local",
   	  "command": "ansible-galaxy install --force -v --roles-path='./ansible/roles' --role-file='./ansible/requirements.yml'"
     },
@@ -63,14 +53,6 @@
       "type": "ansible",
       "user": "ubuntu",
       "playbook_file": "./ansible/playbook.yml"
-    },
-    {
-      "type": "shell",
-      "inline": [
-        "sudo su - root -c 'rvm -v' 2>/dev/null",
-        "sudo su - root -c  'ruby -v' 2>/dev/null",
-        "sudo su - root -c  'gem install serverspec' 2>/dev/null"
-      ]
     },
     {
       "type": "shell-local",
