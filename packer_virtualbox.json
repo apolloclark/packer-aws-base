@@ -45,13 +45,6 @@
     {
       "type": "shell",
       "inline": [
-      	"sudo adduser ubuntu --quiet --gecos \"ubuntu\" --shell /bin/bash --disabled-password",
-        "sudo usermod -aG sudo ubuntu"
-      ]
-    },
-    {
-      "type": "shell",
-      "inline": [
         "sudo apt-get update",
         "sudo apt-get install -y aptitude jq python-minimal python-pip git",
         "sudo -H pip install pip --upgrade",
@@ -61,7 +54,7 @@
     },
     {
       "type": "shell-local",
-  	  "command": "ansible-galaxy install --force -v --roles-path='./ansible/roles' --role-file='./ansible/requirements.yml'"
+      "command": "ansible-galaxy install --force -v --roles-path='./ansible/roles' --role-file='./ansible/requirements.yml'"
     },
     {
       "type": "ansible",
@@ -69,16 +62,8 @@
       "playbook_file": "./ansible/playbook.yml"
     },
     {
-      "type": "shell",
-      "inline": [
-        "sudo su - root -c 'rvm -v' 2>/dev/null",
-        "sudo su - root -c  'ruby -v' 2>/dev/null",
-        "sudo su - root -c  'gem install serverspec' 2>/dev/null"
-      ]
-    },
-    {
       "type": "shell-local",
-  	  "command": "export PACKER_BUILDER='virtualbox-ovf'; export VM_NAME='{{ user `vm_name` }}'; rake spec"
+      "command": "export PACKER_BUILDER='virtualbox-ovf'; export VM_NAME='{{ user `vm_name` }}'; rake spec"
     }
   ],
   "post-processors": [

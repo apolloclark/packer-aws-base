@@ -46,6 +46,16 @@
   ],
   "provisioners": [
     {
+      "type": "shell",
+      "inline": [
+        "sudo apt-get update",
+        "sudo apt-get install -y aptitude jq python-minimal python-pip git",
+        "sudo -H pip install pip --upgrade",
+        "sudo -H pip install git+https://github.com/ansible/ansible.git@devel boto3",
+        "echo 'PATH=\"/root/bin:/root/.local/bin:$PATH\"' | sudo tee --append /root/.profile"
+      ]
+    },
+    {
       "type": "shell-local",
   	  "command": "ansible-galaxy install --force -v --roles-path='./ansible/roles' --role-file='./ansible/requirements.yml'"
     },
