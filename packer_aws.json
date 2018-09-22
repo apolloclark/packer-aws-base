@@ -35,9 +35,6 @@
       "run_volume_tags": {
         "Name": "{{user `ami_name`}}"
       },
-      "snapshot_tags": {
-        "Name": "{{user `ami_name`}}"
-      },
       "ami_description": "Base Image, with Elastic monitoring agents",
       "associate_public_ip_address": "true",
       "vpc_id": "{{user `vpc`}}",
