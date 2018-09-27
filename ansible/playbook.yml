@@ -11,8 +11,8 @@
   roles:
     - geerlingguy.firewall
     - geerlingguy.git
-    - apolloclark.nano-highlighting
-    - apolloclark.aws-cli
+    - apolloclark.nano_highlighting
+    - apolloclark.aws_cli
     - rvm_io.ruby
     - apolloclark.osquery
     - apolloclark.filebeat
