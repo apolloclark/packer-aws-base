@@ -16,7 +16,7 @@ awscli:
     - root
     - ubuntu
 
-# rvm_io.ruby
+# rvm.ruby
 rvm1_bundler_install: True
 rvm1_user: 'root'
 rvm1_rvm_version: 'stable'

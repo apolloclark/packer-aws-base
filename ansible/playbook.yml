@@ -13,7 +13,7 @@
     - geerlingguy.git
     - apolloclark.nano_highlighting
     - apolloclark.aws_cli
-    - rvm_io.ruby
+    - rvm.ruby
     - apolloclark.osquery
     - apolloclark.filebeat
     - apolloclark.metricbeat
