@@ -14,6 +14,7 @@
     - apolloclark.nano_highlighting
     - apolloclark.aws_cli
     - rvm.ruby
+    - geerlingguy.ruby
     - apolloclark.osquery
     - apolloclark.filebeat
     - apolloclark.metricbeat
