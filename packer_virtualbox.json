@@ -49,7 +49,10 @@
         "sudo apt-get install -y aptitude jq python-minimal python-pip git",
         "sudo -H pip install pip --upgrade",
         "sudo -H pip install git+https://github.com/ansible/ansible.git@devel boto3",
-        "echo 'PATH=\"/root/bin:/root/.local/bin:$PATH\"' | sudo tee --append /root/.profile"
+        "echo 'PATH=\"/root/bin:/root/.local/bin:$PATH\"' | sudo tee --append /root/.profile",
+        "sudo /usr/sbin/useradd ubuntu -G sudo -d /home/ubuntu --create-home",
+        "echo 'ubuntu        ALL=(ALL)       NOPASSWD: ALL' | sudo tee --append /etc/sudoers.d/ubuntu",
+        "sudo chmod 440 /etc/sudoers.d/ubuntu"
       ]
     },
     {
