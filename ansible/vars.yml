@@ -25,6 +25,7 @@ rvm1_install_path: /usr/local/rvm
 # geerlingguy.ruby
 ruby_install_gems:
   - serverspec
+ruby_install_gems_user: "vagrant"
 
 
 
