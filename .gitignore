@@ -3,6 +3,7 @@
 .rspec
 .git
 manifest.json
+manifest.json.lock
 vagrant.json
 Gemfile.lock
 
