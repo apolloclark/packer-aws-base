@@ -36,6 +36,7 @@
         "ethernet0.connectionType": "custom",
         "ethernet0.vnet": "vmnet8"
       },
+      "vmx_remove_ethernet_interfaces": true,
       "vm_name": "{{user `vm_name`}}"
     }
   ],
@@ -43,7 +44,6 @@
     {
       "type": "shell",
       "inline": [
-        "mkdir -p /home/vagrant/{{ user `project_name` }}/serverspec",
         "sudo apt-get update",
         "sudo apt-get install -y aptitude jq python-minimal python-pip git",
         "sudo -H pip install pip --upgrade",
@@ -61,6 +61,12 @@
       "playbook_file": "./ansible/playbook.yml",
       "role_paths": [
       	"./ansible/roles"
+      ]
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "mkdir -p /home/vagrant/{{ user `project_name` }}/serverspec"
       ]
     },
     {
