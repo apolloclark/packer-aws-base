@@ -11,3 +11,4 @@ Gemfile.lock
 box/*
 output*/*
 packer_cache/*
+manifest.json.lock

@@ -72,9 +72,6 @@
       "type": "shell",
       "inline": [
         "cd /home/vagrant/{{ user `project_name` }}/serverspec",
-        "pwd",
-        "ls -lah",
-        "export VM_NAME='{{ user `vm_name` }}';",
         "rake spec"
       ]
     }
