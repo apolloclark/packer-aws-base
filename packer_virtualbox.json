@@ -56,17 +56,28 @@
       ]
     },
     {
-      "type": "shell-local",
-      "command": "ansible-galaxy install --force -v --roles-path='./ansible/roles' --role-file='./ansible/requirements.yml'"
-    },
-    {
-      "type": "ansible",
-      "user": "{{ user `ansible_user` }}",
+      "type": "ansible-local",
+      "playbook_dir": "./ansible",
+      "galaxy_file": "./ansible/requirements.yml",
       "playbook_file": "./ansible/playbook.yml"
     },
     {
-      "type": "shell-local",
-      "command": "export PACKER_BUILDER='virtualbox-ovf'; export VM_NAME='{{ user `vm_name` }}'; rake spec"
+      "type": "shell",
+      "inline": [
+        "mkdir -p /home/vagrant/{{ user `project_name` }}/serverspec"
+      ]
+    },
+    {
+      "type": "file",
+      "source": "./serverspec",
+      "destination": "/home/vagrant/{{ user `project_name` }}"
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "cd /home/vagrant/{{ user `project_name` }}/serverspec",
+        "rake spec"
+      ]
     }
   ],
   "post-processors": [
