@@ -45,6 +45,7 @@
     {
       "type": "shell",
       "inline": [
+        "sleep 15s",
         "sudo apt-get update",
         "sudo apt-get install -y aptitude jq python-minimal python-pip git",
         "sudo -H pip install pip --upgrade",
@@ -58,7 +59,7 @@
     },
     {
       "type": "ansible",
-      "user": "ubuntu",
+      "user": "root",
       "playbook_file": "./ansible/playbook.yml"
     },
     {

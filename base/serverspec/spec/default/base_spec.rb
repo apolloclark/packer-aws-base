@@ -1,4 +1,4 @@
-require 'spec_helper'
+require_relative '../spec_helper'
 
 # https://www.singlestoneconsulting.com/articles/writing-efficient-infrastructure-tests-with-serverspec
 # Verify packages

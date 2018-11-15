@@ -14,46 +14,45 @@ firewall_allowed_tcp_ports:
 awscli:
   pip_user: 
     - root
-    - ubuntu
 
 # rvm.ruby
 rvm1_bundler_install: True
-rvm1_user: 'root'
-rvm1_rvm_version: 'stable'
+rvm1_user: "root"
+rvm1_rvm_version: "stable"
 rvm1_install_path: /usr/local/rvm
 
 # geerlingguy.ruby
 ruby_install_gems:
   - serverspec
-ruby_install_gems_user: "vagrant"
+ruby_install_gems_user: "root"
 
 
 
 # apolloclark/osquery
 osquery:
-  version: "2.11.0-1.linux"
+  version: "2.11.2-1.linux"
 
 # apolloclark/filebeat
 filebeat:
- version: "6.4.0"
+ version: "6.4.2"
  install_only: "true"
 
 # apolloclark/metricbeat
 metricbeat:
- version: "6.4.0"
+ version: "6.4.2"
  install_only: "true"
 
 # apolloclark/heartbeat
 heartbeat:
- version: "6.4.0"
+ version: "6.4.2"
  install_only: "true"
 
 # apolloclark/packetbeat
 packetbeat:
-  version: "6.4.0"
+  version: "6.4.2"
   install_only: "true"
 
 # apolloclark/auditbeat
 auditbeat:
-  version: "6.4.0"
+  version: "6.4.2"
   install_only: "true"

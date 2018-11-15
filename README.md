@@ -19,23 +19,22 @@ To use this project, you must have installed:
 ## Deploy to AWS, with Packer
 ```shell
 git clone https://github.com/apolloclark/packer-aws-beats
-cd packer-aws-beats
+cd ./packer-aws-beats/base
 # create a keypair named "packer" or change lines 26, 27 in build_packer_aws.sh
 ./build_packer_aws.sh
 ```
 
-## Deploy Locally, with Packer
+## Deploy to Virtualbox, with Packer
 ```shell
 git clone https://github.com/apolloclark/packer-aws-beats
-cd packer-aws-beats
-# change line 6 in build_packer_virtualbox.sh to a folder with an Ubuntu 16.04 ISO
+cd ./packer-aws-beats/base
 ./build_packer_virtualbox.sh
 ```
 
-## Deploy Locally, with Vagrant
+## Deploy to Virtualbox, with Vagrant
 ```shell
 git clone https://github.com/apolloclark/packer-aws-beats
-cd packer-aws-beats
+cd ./packer-aws-beats/base
 vagrant up
 vagrant ssh
 ```

@@ -36,10 +36,15 @@ Vagrant.configure(2) do |config|
     # Configure the box with Ansible, running within the Guest Machine
     # https://www.vagrantup.com/docs/provisioning/ansible.html
     # https://www.vagrantup.com/docs/provisioning/ansible_common.html
-    config.vm.provision "ansible" do |ansible|
+    config.vm.provision "ansible_local" do |ansible|
         ansible.galaxy_role_file = "./ansible/requirements.yml"
         ansible.playbook = "./ansible/playbook.yml"
     end
+
+    config.vm.provision :shell, inline: <<-EOF
+      sudo ufw allow 22
+      yes | sudo ufw enable
+    EOF
 
     # Verify the components are installed and running
     # https://github.com/vvchik/vagrant-serverspec
@@ -48,6 +53,6 @@ Vagrant.configure(2) do |config|
     config.vm.provision "serverspec" do |spec|
       
         # pattern for specfiles to search
-        spec.pattern = 'spec/*/*_spec.rb'
+        spec.pattern = 'serverspec/spec/*/*_spec.rb'
     end
 end

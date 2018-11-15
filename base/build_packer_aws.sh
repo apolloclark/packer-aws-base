@@ -27,6 +27,9 @@ echo $BUILD_SUBNET_ID;
 export SSH_KEYPAIR_NAME="packer"
 export SSH_PRIVATE_KEY_FILE="$HOME/.ssh/packer.pem"
 
+### delete Ansible roles
+rm -rf ./ansible/roles
+
 
 
 ### build Packer AMI

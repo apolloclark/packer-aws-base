@@ -7,7 +7,7 @@
     "headless": "true",
     "memory": "1024",
     "hostname": "vagrant",
-    "source_path": "../packer-ubuntu/output/vbox/ubuntu1604.ovf",
+    "source_path": "../../packer-ubuntu/output/vbox/ubuntu1604.ovf",
     "ssh_password": "vagrant",
     "ssh_username": "vagrant",
     "vagrantfile_template": "",
