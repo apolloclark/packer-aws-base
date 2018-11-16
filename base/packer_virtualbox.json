@@ -63,15 +63,9 @@
       "playbook_file": "./ansible/playbook_local.yml"
     },
     {
-      "type": "shell",
-      "inline": [
-        "mkdir -p /tmp/{{ user `project_name` }}/serverspec"
-      ]
-    },
-    {
       "type": "file",
       "source": "./serverspec",
-      "destination": "/tmp/{{ user `project_name` }}"
+      "destination": "/tmp/"
     },
     {
       "type": "shell",
