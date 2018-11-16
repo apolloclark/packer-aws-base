@@ -65,21 +65,20 @@
     {
       "type": "shell",
       "inline": [
-        "mkdir -p /home/vagrant/{{ user `project_name` }}/serverspec"
+        "mkdir -p /tmp/{{ user `project_name` }}/serverspec"
       ]
     },
     {
       "type": "file",
       "source": "./serverspec",
-      "destination": "/home/vagrant/{{ user `project_name` }}"
+      "destination": "/tmp/{{ user `project_name` }}"
     },
     {
       "type": "shell",
       "execute_command": "echo '{{ user `ssh_password` }}' | sudo -E -S bash '{{.Path}}'",
       "inline": [
         "gem install serverspec",
-        "cd /home/vagrant/{{ user `project_name` }}/serverspec",
-        "rake spec"
+        "cd /tmp/serverspec; rake spec"
       ]
     }
   ],

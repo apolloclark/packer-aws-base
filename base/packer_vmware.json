@@ -61,21 +61,16 @@
       "playbook_file": "./ansible/playbook_local.yml"
     },
     {
-      "type": "shell",
-      "inline": [
-        "mkdir -p /home/vagrant/{{ user `project_name` }}/serverspec"
-      ]
-    },
-    {
       "type": "file",
       "source": "./serverspec",
-      "destination": "/home/vagrant/{{ user `project_name` }}"
+      "destination": "/tmp/"
     },
     {
       "type": "shell",
+      "execute_command": "echo '{{ user `ssh_password` }}' | sudo -E -S bash '{{.Path}}'",
       "inline": [
-        "cd /home/vagrant/{{ user `project_name` }}/serverspec",
-        "rake spec"
+        "gem install serverspec",
+        "cd /tmp/serverspec; rake spec"
       ]
     }
   ],
