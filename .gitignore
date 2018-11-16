@@ -9,7 +9,7 @@ Gemfile.lock
 
 **/ansible/roles/*
 **/playbook.retry
-box/*
-output*/*
-packer_cache/*
-manifest.json.lock
+base/box/*
+base/output*/*
+base/packer_cache/*
+base/manifest.json.lock
