@@ -30,6 +30,9 @@ export SSH_PRIVATE_KEY_FILE="$HOME/.ssh/packer.pem"
 ### delete Ansible roles
 rm -rf ./ansible/roles
 
+# remove old Ansible roles
+rm -rf ./ansible/roles
+
 
 
 ### build Packer AMI

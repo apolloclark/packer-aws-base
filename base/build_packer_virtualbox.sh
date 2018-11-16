@@ -4,6 +4,9 @@ start=`date +%s`
 # remove old OVF file
 rm -rf ./output/vbox
 
+# remove old Ansible roles
+rm -rf ./ansible/roles
+
 packer validate packer_virtualbox.json
 
 packer inspect packer_virtualbox.json
