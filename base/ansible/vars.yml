@@ -16,14 +16,15 @@ awscli:
     - root
 
 # rvm.ruby
-rvm1_bundler_install: True
 rvm1_user: "root"
-rvm1_rvm_version: "stable"
-rvm1_install_path: /usr/local/rvm
+rvm1_install_path: '/home/{{ rvm1_user }}/.rvm'
+# rvm1_install_path: /usr/local/rvm
+rvm1_install_flags: '--auto-dotfiles --user-install'
 
 # geerlingguy.ruby
 ruby_install_gems:
   - serverspec
+  - rspec
 ruby_install_gems_user: "root"
 
 
