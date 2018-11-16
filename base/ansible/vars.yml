@@ -18,7 +18,6 @@ awscli:
 # rvm.ruby
 rvm1_user: "root"
 rvm1_install_path: '/home/{{ rvm1_user }}/.rvm'
-# rvm1_install_path: /usr/local/rvm
 rvm1_install_flags: '--auto-dotfiles --user-install'
 
 # geerlingguy.ruby
