@@ -10,7 +10,7 @@ Vagrant.configure(2) do |config|
     config.vm.provider "virtualbox" do |vb, override|
 
         # set the VM name
-        vb.name = "ubuntu16.04-beats"
+        vb.name = "packer-aws-beats"
 
         # set the CPU, memory, graphics
         # @see https://www.virtualbox.org/manual/ch08.html
