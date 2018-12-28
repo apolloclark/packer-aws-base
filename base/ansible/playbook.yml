@@ -3,6 +3,7 @@
 # playbook.yml
 
 - hosts: all
+  connection: local
   gather_facts: yes
   become: true
   become_user: "root"
