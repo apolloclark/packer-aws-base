@@ -1,5 +1,37 @@
 require_relative '../spec_helper'
 
+# Define packages
+Packages = {
+  'filebeat' => {
+    version: '6.4.2'
+  },
+  'metricbeat' => {
+    version: '6.4.2'
+  },
+  'heartbeat-elastic' => {
+    version: '6.4.2'
+  },
+  'packetbeat' => {
+    version: '6.4.2'
+  },
+  'auditbeat' => {
+    version: '6.4.2'
+  },
+  'osquery' => {
+    version: '2.11.2-1.linux'
+  }
+}
+
+# Define Installed services
+InstalledServices = [
+]
+
+# Define Running services
+ActiveServices = [
+]
+
+
+
 # https://www.singlestoneconsulting.com/articles/writing-efficient-infrastructure-tests-with-serverspec
 # Verify packages
 Packages.each do |name, details|
