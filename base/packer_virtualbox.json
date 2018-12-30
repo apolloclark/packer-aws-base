@@ -71,7 +71,7 @@
       "type": "shell",
       "execute_command": "echo '{{ user `ssh_password` }}' | sudo -E -S bash '{{.Path}}'",
       "inline": [
-        "gem install serverspec",
+        "source /home/root/.rvm/scripts/rvm; rvm -v; ruby -v; gem install serverspec",
         "cd /tmp/serverspec; rake spec"
       ]
     }

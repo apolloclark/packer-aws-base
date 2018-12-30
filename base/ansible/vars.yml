@@ -22,8 +22,8 @@ rvm1_install_flags: '--auto-dotfiles --user-install'
 
 # geerlingguy.ruby
 ruby_install_gems:
-  - serverspec
   - rspec
+  - serverspec
 ruby_install_gems_user: "root"
 
 
