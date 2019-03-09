@@ -6,7 +6,6 @@
     "ssh_keypair_name": "{{env `SSH_KEYPAIR_NAME`}}",
     "ssh_private_key_file": "{{env `SSH_PRIVATE_KEY_FILE`}}",
     "ami_name": "packer-aws-beats-{{isotime \"2006-01-02_15-04-06\"}}",
-    "project_name": "packer-aws-beats",
     "version": "{{isotime \"20060102.030405\"}}"
   },
   "builders": [
