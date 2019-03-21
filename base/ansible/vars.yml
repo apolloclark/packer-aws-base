@@ -30,7 +30,7 @@ ruby_install_gems_user: "root"
 
 # apolloclark/osquery
 osquery:
-  version: "2.11.2-1.linux"
+  version: "3.3.2-1.linux"
 
 # apolloclark/filebeat
 filebeat:
