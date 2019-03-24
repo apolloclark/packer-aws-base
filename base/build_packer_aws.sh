@@ -30,17 +30,11 @@ export SSH_PRIVATE_KEY_FILE="$HOME/.ssh/$SSH_KEYPAIR_NAME.pem"
 ### delete Ansible roles
 rm -rf ./ansible/roles
 
-# remove old Ansible roles
-rm -rf ./ansible/roles
-
 
 
 ### build Packer AMI
-
 packer validate packer_aws.json
-
 packer inspect packer_aws.json
-
 packer build -only=amazon-ebs packer_aws.json
 
 # print AMI ID
